@@ -1,5 +1,5 @@
-#ifndef __YOYO_H__
-#define __YOYO_H__
+#ifndef __YOYO_DRAW_H__
+#define __YOYO_DRAW_H__
 
 #include <linux/fb.h>
 
@@ -29,7 +29,7 @@ typedef struct {
     uint32_t height;
 } Rectangle;
 
-void set_pixel(const struct fb_var_screeninfo *screen, uint8_t *buffer, Coord location, BGRA value);
-void set_rect(const struct fb_var_screeninfo *screen, uint8_t *buffer, Rectangle rect, BGRA value);
+void draw_pixel(const struct fb_var_screeninfo *screen, uint8_t *buffer, Coord location, BGRA value);
+void draw_rect(const struct fb_var_screeninfo *screen, uint8_t *buffer, Rectangle rect, BGRA value);
 
-#endif // __YOYO_H__
+#endif // __YOYO_DRAW_H__

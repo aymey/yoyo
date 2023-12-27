@@ -1,6 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -ggdb
+LIBS = -I/usr/include/freetype2 -lfreetype
+CFLAGS = -Wall -Wextra -ggdb $(LIBS)
 TARGET = yoyo
 
 yoyo: src/*
-	$(CC) $(CFLAGS) src/* -o $(TARGET)
+	$(CC) $(CFLAGS) src/*.c src/text/*.c -o $(TARGET)

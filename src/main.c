@@ -4,6 +4,9 @@
 #include <sys/fcntl.h>
 #include <sys/mman.h>
 
+#include <freetype2/ft2build.h>
+#include <freetype2/freetype/freetype.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -11,9 +14,11 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "yoyo.h"
+#include "yoyo_draw.h"
+#include "text/yoyo_text.h"
 
 #define FB_FILE "/dev/fb0"
+#define FONT_FILE "example/font.ttf"
 
 int main(void) {
     if(getuid()) {
@@ -38,13 +43,9 @@ int main(void) {
         );
 
 
-    // memset(fbdata, 10, fb_size);
+    // draw_rect(&screen, fbdata, (Rectangle) {0, 0, 1000, 1000}, (BGRA) {100, 100, 100, 0});
 
-    // set_rect(&screen, fbdata, (Rectangle) {0, 0, 1000, 1000}, (BGRA) {100, 100, 100, 0});
-    for(int i = 0; i < 1000; i++)
-        for(int j = 0; j < 1000; j++)
-            set_pixel(&screen, fbdata, (Coord) {i, j}, (BGRA) {j-i, j*i, i+j, 0});
-
+    draw_text(&screen, fbdata, (Rectangle) {500, 500, 50, 50}, "abcdef", FONT_FILE, (BGRA) {255, 255, 255, 0});
 
     munmap(fbdata, fb_size);
     close(fbfd);
